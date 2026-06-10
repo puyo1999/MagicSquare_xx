@@ -167,6 +167,7 @@ MagicSquare_xx/
 | [Session 3 워크북](Report/03.%20MagicSquare_1004%20Session%203%20%EC%9B%8C%ED%81%AC%EB%B6%81.md) | R-G-I-O · SC-1~3 · Command 계약 |
 | [entity ARRR 보고](Report/05.REPORT.md) | D-LOC-01 · D-SOL-01 · REFACTOR |
 | [Dual-Track RED Planning](Report/06.%20MagicSquare_1004%20Dual-Track%20RED%20Planning%20%EB%B3%B4%EA%B3%A0%EC%84%9C.md) | D-LOC-02·03 · U-IN-01·02 Plan · README 갱신 |
+| [D-LOC-01 RED Skeleton](Report/07.%20MagicSquare_1004%20D-LOC-01%20RED%20Skeleton%20%EB%B3%B4%EA%B3%A0%EC%84%9C.md) | `pytest.fail` RED · `test_d_loc_01_blank_coords_row_major` |
 
 **Prompting**
 
@@ -174,6 +175,7 @@ MagicSquare_xx/
 |------|------|
 | `Prompting/05.Export-Transcript.md` | entity Logic Track ARRR Export |
 | `Prompting/06. cursor_magic_square_1004_dual_track_red_planning.md` | Dual-Track RED Planning Export |
+| `Prompting/07. cursor_magic_square_1004_d_loc_01_red_skeleton.md` | D-LOC-01 RED Skeleton Export |
 
 ---
 
