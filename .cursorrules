@@ -1,0 +1,59 @@
+# MagicSquare_xx — Session 3 (Rule · Command · Test Loop)
+
+## 프로젝트
+
+- 4×4 부분·완전 마방진 검증. Mom Test SSOT: 행 합만으로 완료 착각하지 않고, 삽입 후 10축 판정.
+- 코드 범위: `validate_lines` Command + pytest Test Loop. Solver·UI·ECB·SquareValidator 클래스는 이번 세션 범위 밖.
+
+## 도메인 (SSOT)
+
+- 격자: 4×4 `list[list[int]]`.
+- 값: `0` = 빈칸, 채워진 칸은 `1~16`.
+- 마법상수: 각 줄(10선) 합 **34**.
+- 10선 ID — 행 **R1~R4**, 열 **C1~C4**, 대각 **D1**(주대각), **D2**(반대각).
+- Rule R2(셀 무결성: 1~16 각 1회, 중복·범위 위반)는 `validate_lines` **밖**. D-003은 별도 판정.
+
+## Command API
+
+```python
+validate_lines(grid) -> dict
+# {"status": "pass" | "fail" | "incomplete", "failed_lines": [...]}
+```
+
+| status | 조건 |
+|--------|------|
+| `incomplete` | 빈칸(`0`) 하나라도 있음 → `failed_lines=[]`, 10선 판정 보류 |
+| `pass` | 16칸 완성 + 10선 모두 합 34 → `failed_lines=[]` |
+| `fail` | 16칸 완성인데 합≠34인 줄 존재 → 해당 줄 ID를 `failed_lines`에 |
+
+- 구현: `src/validate_lines.py`. 테스트: `tests/test_validate_lines.py`.
+- Test Loop: **D-001** pass · **D-002** 행=34·열/대각 fail · **D-003** R2(무결성, `validate_lines`와 별도).
+
+## TDD (엄격)
+
+1. **RED** — `tests/`만 수정. 실패하는 테스트·픽스처 추가. `src/`는 건드리지 않음.
+2. **GREEN** — 테스트를 통과하는 최소 구현만 `src/`에 추가.
+3. **REFACTOR** — 동작 유지하며 정리. 테스트는 그대로 통과해야 함.
+
+금지:
+- assert 완화, `@pytest.mark.skip`, `xfail`, 조건 삭제로 RED 회피.
+- RED 단계에서 `src/` 선행 구현.
+- 테스트 없이 `src/`만 수정.
+
+검증: `pytest` (설정: `pyproject.toml`).
+
+## AI 응답 규칙
+
+- **한국어**로 답변.
+- TDD 작업 시 **첫 줄에 Phase 선언**: `Phase: RED` / `Phase: GREEN` / `Phase: REFACTOR`.
+- Phase와 실제 수정 파일이 일치해야 함 (RED → tests만, GREEN/REFACTOR → src 허용).
+- 변경은 요청·Phase 범위 내 최소 diff. 주석·docstring은 비즈니스 규칙이 불명확할 때만.
+- **git commit / push**는 사용자가 명시적으로 요청할 때만. 임의 커밋 금지.
+
+## 파일 역할
+
+| 경로 | 역할 |
+|------|------|
+| `src/validate_lines.py` | Command 구현 |
+| `tests/test_validate_lines.py` | D-001~D-003 및 SC 시나리오 |
+| `Report/03.*` | Session 3 워크북 SSOT (판정·시나리오 참조) |
