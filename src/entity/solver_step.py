@@ -1,5 +1,5 @@
-from src.find_blank_coords import find_blank_coords
 from src.entity.constants import BLANK_CELL, TARGET_SUM
+from src.entity.find_blank_coords import find_blank_coords
 
 
 def solve_step_a(grid: list[list[int]]) -> list[int]:
